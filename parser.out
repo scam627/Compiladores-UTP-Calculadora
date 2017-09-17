@@ -1,0 +1,348 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> declaration_list
+Rule 2     declaration_list -> declaration_list declaration
+Rule 3     declaration_list -> declaration
+Rule 4     declaration -> expression AMPERSAND
+Rule 5     expression -> expression PLUS term
+Rule 6     expression -> expression MINUS term
+Rule 7     expression -> term
+Rule 8     term -> term MULTIPLY factor
+Rule 9     term -> term DIVIDE factor
+Rule 10    term -> factor
+Rule 11    factor -> NUM
+Rule 12    factor -> ID
+Rule 13    factor -> LPAREN expression RPAREN
+
+Terminals, with rules where they appear
+
+AMPERSAND            : 4
+DIVIDE               : 9
+ID                   : 12
+LPAREN               : 13
+MINUS                : 6
+MULTIPLY             : 8
+NUM                  : 11
+PLUS                 : 5
+RPAREN               : 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+declaration          : 2 3
+declaration_list     : 1 2
+expression           : 4 5 6 13
+factor               : 8 9 10
+program              : 0
+term                 : 5 6 7 8 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . declaration_list
+    (2) declaration_list -> . declaration_list declaration
+    (3) declaration_list -> . declaration
+    (4) declaration -> . expression AMPERSAND
+    (5) expression -> . expression PLUS term
+    (6) expression -> . expression MINUS term
+    (7) expression -> . term
+    (8) term -> . term MULTIPLY factor
+    (9) term -> . term DIVIDE factor
+    (10) term -> . factor
+    (11) factor -> . NUM
+    (12) factor -> . ID
+    (13) factor -> . LPAREN expression RPAREN
+
+    NUM             shift and go to state 3
+    ID              shift and go to state 8
+    LPAREN          shift and go to state 6
+
+    term                           shift and go to state 1
+    declaration                    shift and go to state 7
+    declaration_list               shift and go to state 4
+    program                        shift and go to state 5
+    factor                         shift and go to state 2
+    expression                     shift and go to state 9
+
+state 1
+
+    (7) expression -> term .
+    (8) term -> term . MULTIPLY factor
+    (9) term -> term . DIVIDE factor
+
+    AMPERSAND       reduce using rule 7 (expression -> term .)
+    PLUS            reduce using rule 7 (expression -> term .)
+    MINUS           reduce using rule 7 (expression -> term .)
+    RPAREN          reduce using rule 7 (expression -> term .)
+    MULTIPLY        shift and go to state 10
+    DIVIDE          shift and go to state 11
+
+
+state 2
+
+    (10) term -> factor .
+
+    MULTIPLY        reduce using rule 10 (term -> factor .)
+    DIVIDE          reduce using rule 10 (term -> factor .)
+    AMPERSAND       reduce using rule 10 (term -> factor .)
+    PLUS            reduce using rule 10 (term -> factor .)
+    MINUS           reduce using rule 10 (term -> factor .)
+    RPAREN          reduce using rule 10 (term -> factor .)
+
+
+state 3
+
+    (11) factor -> NUM .
+
+    MULTIPLY        reduce using rule 11 (factor -> NUM .)
+    DIVIDE          reduce using rule 11 (factor -> NUM .)
+    AMPERSAND       reduce using rule 11 (factor -> NUM .)
+    PLUS            reduce using rule 11 (factor -> NUM .)
+    MINUS           reduce using rule 11 (factor -> NUM .)
+    RPAREN          reduce using rule 11 (factor -> NUM .)
+
+
+state 4
+
+    (1) program -> declaration_list .
+    (2) declaration_list -> declaration_list . declaration
+    (4) declaration -> . expression AMPERSAND
+    (5) expression -> . expression PLUS term
+    (6) expression -> . expression MINUS term
+    (7) expression -> . term
+    (8) term -> . term MULTIPLY factor
+    (9) term -> . term DIVIDE factor
+    (10) term -> . factor
+    (11) factor -> . NUM
+    (12) factor -> . ID
+    (13) factor -> . LPAREN expression RPAREN
+
+    $end            reduce using rule 1 (program -> declaration_list .)
+    NUM             shift and go to state 3
+    ID              shift and go to state 8
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 2
+    term                           shift and go to state 1
+    declaration                    shift and go to state 12
+    expression                     shift and go to state 9
+
+state 5
+
+    (0) S' -> program .
+
+
+
+state 6
+
+    (13) factor -> LPAREN . expression RPAREN
+    (5) expression -> . expression PLUS term
+    (6) expression -> . expression MINUS term
+    (7) expression -> . term
+    (8) term -> . term MULTIPLY factor
+    (9) term -> . term DIVIDE factor
+    (10) term -> . factor
+    (11) factor -> . NUM
+    (12) factor -> . ID
+    (13) factor -> . LPAREN expression RPAREN
+
+    NUM             shift and go to state 3
+    ID              shift and go to state 8
+    LPAREN          shift and go to state 6
+
+    term                           shift and go to state 1
+    expression                     shift and go to state 13
+    factor                         shift and go to state 2
+
+state 7
+
+    (3) declaration_list -> declaration .
+
+    NUM             reduce using rule 3 (declaration_list -> declaration .)
+    ID              reduce using rule 3 (declaration_list -> declaration .)
+    LPAREN          reduce using rule 3 (declaration_list -> declaration .)
+    $end            reduce using rule 3 (declaration_list -> declaration .)
+
+
+state 8
+
+    (12) factor -> ID .
+
+    MULTIPLY        reduce using rule 12 (factor -> ID .)
+    DIVIDE          reduce using rule 12 (factor -> ID .)
+    AMPERSAND       reduce using rule 12 (factor -> ID .)
+    PLUS            reduce using rule 12 (factor -> ID .)
+    MINUS           reduce using rule 12 (factor -> ID .)
+    RPAREN          reduce using rule 12 (factor -> ID .)
+
+
+state 9
+
+    (4) declaration -> expression . AMPERSAND
+    (5) expression -> expression . PLUS term
+    (6) expression -> expression . MINUS term
+
+    AMPERSAND       shift and go to state 14
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 15
+
+
+state 10
+
+    (8) term -> term MULTIPLY . factor
+    (11) factor -> . NUM
+    (12) factor -> . ID
+    (13) factor -> . LPAREN expression RPAREN
+
+    NUM             shift and go to state 3
+    ID              shift and go to state 8
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 17
+
+state 11
+
+    (9) term -> term DIVIDE . factor
+    (11) factor -> . NUM
+    (12) factor -> . ID
+    (13) factor -> . LPAREN expression RPAREN
+
+    NUM             shift and go to state 3
+    ID              shift and go to state 8
+    LPAREN          shift and go to state 6
+
+    factor                         shift and go to state 18
+
+state 12
+
+    (2) declaration_list -> declaration_list declaration .
+
+    NUM             reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    ID              reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    LPAREN          reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    $end            reduce using rule 2 (declaration_list -> declaration_list declaration .)
+
+
+state 13
+
+    (13) factor -> LPAREN expression . RPAREN
+    (5) expression -> expression . PLUS term
+    (6) expression -> expression . MINUS term
+
+    RPAREN          shift and go to state 19
+    PLUS            shift and go to state 16
+    MINUS           shift and go to state 15
+
+
+state 14
+
+    (4) declaration -> expression AMPERSAND .
+
+    NUM             reduce using rule 4 (declaration -> expression AMPERSAND .)
+    ID              reduce using rule 4 (declaration -> expression AMPERSAND .)
+    LPAREN          reduce using rule 4 (declaration -> expression AMPERSAND .)
+    $end            reduce using rule 4 (declaration -> expression AMPERSAND .)
+
+
+state 15
+
+    (6) expression -> expression MINUS . term
+    (8) term -> . term MULTIPLY factor
+    (9) term -> . term DIVIDE factor
+    (10) term -> . factor
+    (11) factor -> . NUM
+    (12) factor -> . ID
+    (13) factor -> . LPAREN expression RPAREN
+
+    NUM             shift and go to state 3
+    ID              shift and go to state 8
+    LPAREN          shift and go to state 6
+
+    term                           shift and go to state 20
+    factor                         shift and go to state 2
+
+state 16
+
+    (5) expression -> expression PLUS . term
+    (8) term -> . term MULTIPLY factor
+    (9) term -> . term DIVIDE factor
+    (10) term -> . factor
+    (11) factor -> . NUM
+    (12) factor -> . ID
+    (13) factor -> . LPAREN expression RPAREN
+
+    NUM             shift and go to state 3
+    ID              shift and go to state 8
+    LPAREN          shift and go to state 6
+
+    term                           shift and go to state 21
+    factor                         shift and go to state 2
+
+state 17
+
+    (8) term -> term MULTIPLY factor .
+
+    MULTIPLY        reduce using rule 8 (term -> term MULTIPLY factor .)
+    DIVIDE          reduce using rule 8 (term -> term MULTIPLY factor .)
+    AMPERSAND       reduce using rule 8 (term -> term MULTIPLY factor .)
+    PLUS            reduce using rule 8 (term -> term MULTIPLY factor .)
+    MINUS           reduce using rule 8 (term -> term MULTIPLY factor .)
+    RPAREN          reduce using rule 8 (term -> term MULTIPLY factor .)
+
+
+state 18
+
+    (9) term -> term DIVIDE factor .
+
+    MULTIPLY        reduce using rule 9 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 9 (term -> term DIVIDE factor .)
+    AMPERSAND       reduce using rule 9 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 9 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 9 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 9 (term -> term DIVIDE factor .)
+
+
+state 19
+
+    (13) factor -> LPAREN expression RPAREN .
+
+    MULTIPLY        reduce using rule 13 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 13 (factor -> LPAREN expression RPAREN .)
+    AMPERSAND       reduce using rule 13 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 13 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 13 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 13 (factor -> LPAREN expression RPAREN .)
+
+
+state 20
+
+    (6) expression -> expression MINUS term .
+    (8) term -> term . MULTIPLY factor
+    (9) term -> term . DIVIDE factor
+
+    AMPERSAND       reduce using rule 6 (expression -> expression MINUS term .)
+    PLUS            reduce using rule 6 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 6 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 6 (expression -> expression MINUS term .)
+    MULTIPLY        shift and go to state 10
+    DIVIDE          shift and go to state 11
+
+
+state 21
+
+    (5) expression -> expression PLUS term .
+    (8) term -> term . MULTIPLY factor
+    (9) term -> term . DIVIDE factor
+
+    AMPERSAND       reduce using rule 5 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 5 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 5 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 5 (expression -> expression PLUS term .)
+    MULTIPLY        shift and go to state 10
+    DIVIDE          shift and go to state 11
+
